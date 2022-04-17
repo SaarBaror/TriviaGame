@@ -1,2 +1,2 @@
-# TriviaGame
-Trivia game project
+# Trivia Game
+Trivia game project By Saar Bar Or
