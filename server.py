@@ -163,7 +163,7 @@ def load_user_database():
     Receives: nothing
     Returns: user dictionary
     """
-    file = open(r"D:\Trivia\usersdata.txt", 'r')
+    file = open(r"usersdata.txt", 'r')
     dict_users = file.read()
     users = eval(dict_users)
     return users
