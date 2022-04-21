@@ -20,6 +20,10 @@ def build_and_send_message(conn, code, msg):
 
 
 def get_score(conn):
+    """
+    The function receives a socket, and uses build_send_recv_parse to send MY_SCORE message to the server,
+    receives a YOUR_SCORE message back, and prints the score.
+    """
     msg, cmd = build_send_recv_parse(conn, "MY_SCORE", "")
     if cmd == "YOUR_SCORE":
         print("Score: ", msg)
@@ -28,6 +32,10 @@ def get_score(conn):
 
 
 def build_send_recv_parse(conn, command, message):
+    """
+    The function receives a socket, message and command and it builds a message to send to the server.
+    Then, it receives back a message from the server and returns the data and command.
+    """
     build_and_send_message(conn, command, message)
     cmd, msg = recv_message_and_parse(conn)
     return msg, cmd
@@ -41,8 +49,6 @@ def recv_message_and_parse(conn):
     Returns: cmd (str) and data (str) of the received message.
     If error occurred, will return None, None
     """
-    # Implement Code
-    # ..
     data = conn.recv(1024)
     if type(data) == bytes:
         cmd, msg = chatlib_skeleton.parse_message(data.decode())
@@ -52,23 +58,39 @@ def recv_message_and_parse(conn):
 
 
 def connect():
-    # Implement Code
+    """
+    connects the client with the server and returns the socket.
+    """
     my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     my_socket.connect((SERVER_IP, SERVER_PORT))
     return my_socket
 
 
 def get_logged_users(conn):
+    """
+    This func receives a socket, and uses build_send_recv_parse in order to get a list
+    of all the logged users, and then prints it.
+    """
     msg, cmd = build_send_recv_parse(conn, "LOGGED", "")
     print("The logged users are: ", msg)
 
 
 def get_highscore(conn):
+    """
+    This function receives a socket and uses  build_send_recv_parse to get a list of the 5 users with best score,
+    and then it prints it.
+    """
     msg, cmd = build_send_recv_parse(conn, "HIGHSCORE", "")
     print(msg)
 
 
 def play_question(conn):
+    """
+    This function receives a socket, and gets a random question from the server using  build_send_recv_parse.
+    If no questions are left, the function stops.
+    Else, the function builds a trivia question using the data it got from the server, and it prints a message
+    that says if you were correct or not, depending on your answer.
+    """
     msg, cmd = build_send_recv_parse(conn, "GET_QUESTION", "")
     if cmd != "ERROR":
         if cmd == "NO_QUESTIONS":
@@ -113,11 +135,19 @@ def play_question(conn):
 
 
 def error_and_exit(msg):
+    """
+    The function receives a message, prints it and returns exit.
+    """
     print(msg)
     return exit()
 
 
 def login(conn):
+    """
+    The function receives a socket, and loops until a user and password 
+    that are in the database (and not logged to the server already),
+    then it prints a message telling the client the login was succesfull.
+    """
     username = input("Please enter username: \n")
     password = input("Please enter password: \n")
     data = username + "#" + password
@@ -132,11 +162,12 @@ def login(conn):
         cmd, msg = recv_message_and_parse(conn)
         print("------------")
     print("Login was successful")
-    # Implement code
 
 
-# Implement code
 def logout(conn):
+    """
+    The function receives a socket, and sends a log out message to the server.
+    """
     build_and_send_message(conn, "LOGOUT", "")
 
 
