@@ -234,7 +234,6 @@ def handle_logout_message(conn):
         send_error(conn, "Socket not in dictionary")
 
 
-# Implement code ...
 def checkint(str1):
     """
     this function checks if the string it receives is an integer, returns true if it is and false otherwise.
@@ -278,7 +277,6 @@ def handle_login_message(conn, data):
         send_error(conn, "User not in database or already logged")
 
 
-# Implement code ...
 def create_random_question(username):
     """
     this function receives a username, and creates a question message to send to the user.
@@ -432,9 +430,6 @@ def handle_client_message(conn, cmd, data):
             print("----------")
         else:
             send_error(conn, "Unknown/Unauthorized command")
-
-
-# Implement code ...
 
 
 def main():
