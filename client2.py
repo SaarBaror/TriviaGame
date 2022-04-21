@@ -49,8 +49,6 @@ def recv_message_and_parse(conn):
     Returns: cmd (str) and data (str) of the received message.
     If error occurred, will return None, None
     """
-    # Implement Code
-    # ..
     data = conn.recv(1024)
     if type(data) == bytes:
         cmd, msg = chatlib_skeleton.parse_message(data.decode())
@@ -63,7 +61,6 @@ def connect():
     """
     connects the client with the server and returns the socket.
     """
-    # Implement Code
     my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     my_socket.connect((SERVER_IP, SERVER_PORT))
     return my_socket
@@ -165,10 +162,8 @@ def login(conn):
         cmd, msg = recv_message_and_parse(conn)
         print("------------")
     print("Login was successful")
-    # Implement code
 
 
-# Implement code
 def logout(conn):
     """
     The function receives a socket, and sends a log out message to the server.
